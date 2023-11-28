@@ -1,20 +1,27 @@
-function Card({character}){
-    function markClicked(){
-
+function Card({character, handleClick, setScore, charactersToPlayWith, setCharacterstoDisplay, getCharactersToDisplay}){
+    function handleClick(){
+        if(!character.clicked){
+            console.log(character, charactersToPlayWith.length)
+            character.clicked = true
+            setScore(score => score+1);
+            getCharactersToDisplay(charactersToPlayWith)
+        }
+        else{
+            console.log("defeat");
+        }
     }
     return(
         <div
-            className="Card">
+            className={"Card " + character.name}
+            onClick={handleClick}>
             <div
                 style={{
-                    width: "100%",
+                    width: "180px",
                     height: "100%",
-                    backgroundImage: `url("./src/assets/${character}.jpg")`,
-                    backgroundSize: "100%"
-                }}
-                onClick={markClicked}>
+                    backgroundImage: `url(${character.src})`,
+                    backgroundSize: "cover"
+                }}>
             </div>
-            {/* <h3>{character}</h3> */}
         </div>
     )
 }

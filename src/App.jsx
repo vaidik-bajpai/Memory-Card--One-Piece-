@@ -1,20 +1,93 @@
+import { useState } from 'react'
+
 import './App.css'
 import Card from './component/card.jsx'
 import Title from './component/title'
+import Foot from './component/footer'
+import StartPage from './pages/startpage'
+import GamePage from './pages/gamepage'
+import characters from './characters'
 
 function App() {
+    const [bestScore, setBestScore] = useState(0)
+    const [score, setScore] = useState(0)
+    const [playSound, setPlaySound] = useState(true)
+    const [playMusic, setPlayMusic] = useState(false)
+    const [charactersToPlayWith, setCharactersToPlayWith] = useState([])
+    const [charactersToDisplay, setCharactersToDisplay] = useState([])
+    const [difficulty, setDifficulty] = useState([])
+    const [start, setStart] = useState(false)
 
-  return (
-    <>
-      <Title />
-      <div className="Cards">
-        <Card character="Katakuri"/>
-        <Card character="Sabo"/>
-        <Card character="Trafalgarlaw"/>
-        <Card character="Whitebeard"/>
-      </div>
-      {/* <div class="tenor-gif-embed" data-postid="24433199" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%"><a href="https://tenor.com/view/one-piece-opening-monkey-d-luffy-roronoa-zoro-sanji-gif-24433199">One Piece Opening GIF</a>from <a href="https://tenor.com/search/one+piece-gifs">One Piece GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script> */}
-    </>
+    function goBackToStartPage(){
+      console.log("goBackToStartPage")
+      setDifficulty([])
+      setStart(false)
+    }
+    function handleClick(){
+      console.log("clicked")
+    }
+    const getCharactersToPlayWith = () => {
+      let randomCharacters = [];
+  
+      while(randomCharacters.length < 6) {
+        const randNum = Math.floor(Math.random() * 8);
+        if(!randomCharacters.includes(characters[randNum])) {
+          randomCharacters.push(characters[randNum]);
+        }
+      }
+  
+      setCharactersToPlayWith(randomCharacters);
+      getCharactersToDisplay(randomCharacters);
+    };
+  
+    const getCharactersToDisplay = (array) => {
+      /* console.log('entered') */
+      if(score+1 === array.length){ 
+        return;
+      }
+      let shuffledCharacters = [];
+      let clicked = 0;
+  
+      while(shuffledCharacters.length < 4) {
+        const randNum = Math.floor(Math.random() * array.length);
+        const character = array[randNum];
+        if(!shuffledCharacters.includes(character)
+          && (clicked < 3 || !character.clicked)) {
+          shuffledCharacters.push(character);
+          clicked = clicked+character.clicked
+          console.log(character.name, clicked)
+        }
+      }
+      setCharactersToDisplay(shuffledCharacters);
+      /* console.log('exit') */
+    };
+  
+    return (
+      start ? (<>
+          <GamePage
+              charactersToPlayWith={charactersToPlayWith}
+              getCharactersToPlayWith={getCharactersToPlayWith}
+              charactersToDisplay={charactersToDisplay}
+              setCharactersToDisplay={setCharactersToDisplay}
+              getCharactersToDisplay={getCharactersToDisplay}
+              setCharactersToPlayWith={setCharactersToPlayWith}
+              score={score}
+              setScore={setScore}
+              setBestScore={setBestScore}
+              bestScore={bestScore}
+              handleClick={handleClick}
+              goBackToStartPage={goBackToStartPage}
+              />
+          <Foot 
+              playSound={playSound}
+              setPlaySound={setPlaySound}
+              playMusic={playMusic}
+              setPlayMusic={setPlayMusic}
+              getCharactersToDisplay={getCharactersToDisplay}/>
+        </>
+    ) : (
+      <StartPage setStart={setStart} setDifficulty={setDifficulty}/>
+    )
   )
 }
 
