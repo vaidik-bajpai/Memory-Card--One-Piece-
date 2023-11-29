@@ -2,6 +2,7 @@ import Title from "../component/title"
 import Card from "../component/card"
 import characters from "../characters"
 import { useState, useEffect } from "react";  
+import GameOver from "./gameOver";
 
 function GamePage({
     charactersToPlayWith,
@@ -16,6 +17,7 @@ function GamePage({
     bestScore,
     handleClick,
     setCharactersToDisplay,
+    setDefeat,
 }){
     useEffect(() => {
         console.log('start');
@@ -46,7 +48,7 @@ function GamePage({
                 height="100%">
                 {charactersToDisplay.map(character => {
                     return(
-                        <Card character={character} charactersToPlayWith={charactersToPlayWith} setCharactersToDisplay={setCharactersToDisplay} key={character.id} handleClick={handleClick} setScore={setScore} getCharactersToDisplay={getCharactersToDisplay}/>
+                        <Card setDefeat={setDefeat} character={character} charactersToPlayWith={charactersToPlayWith} setCharactersToDisplay={setCharactersToDisplay} key={character.id} handleClick={handleClick} setScore={setScore} getCharactersToDisplay={getCharactersToDisplay}/>
                     )
                 })}
             </div>

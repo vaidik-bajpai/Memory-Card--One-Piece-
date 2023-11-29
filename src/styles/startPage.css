@@ -9,6 +9,7 @@
     font-weight: 800;
     background-image: linear-gradient( #62C3F8, #2E62A3);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
     font-size: 3.5rem;
 }
@@ -16,6 +17,7 @@
 .gameTitle span{
     background-color: #D70000;
     -webkit-background-clip: text;
+    background-clip: text;
   }
 
 .startPage{

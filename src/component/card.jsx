@@ -1,4 +1,4 @@
-function Card({character, handleClick, setScore, charactersToPlayWith, setCharacterstoDisplay, getCharactersToDisplay}){
+function Card({character, handleClick, setScore, charactersToPlayWith, setCharacterstoDisplay, getCharactersToDisplay, setDefeat}){
     function handleClick(){
         if(!character.clicked){
             console.log(character, charactersToPlayWith.length)
@@ -8,6 +8,8 @@ function Card({character, handleClick, setScore, charactersToPlayWith, setCharac
         }
         else{
             console.log("defeat");
+
+            setDefeat(true);
         }
     }
     return(

@@ -7,6 +7,7 @@ import Foot from './component/footer'
 import StartPage from './pages/startpage'
 import GamePage from './pages/gamepage'
 import characters from './characters'
+import GameOver from './pages/gameOver.jsx'
 
 function App() {
     const [bestScore, setBestScore] = useState(0)
@@ -17,6 +18,7 @@ function App() {
     const [charactersToDisplay, setCharactersToDisplay] = useState([])
     const [difficulty, setDifficulty] = useState([])
     const [start, setStart] = useState(false)
+    const [roundResult, setRoundResult] = useState('')
 
     function goBackToStartPage(){
       console.log("goBackToStartPage")
@@ -43,6 +45,7 @@ function App() {
     const getCharactersToDisplay = (array) => {
       /* console.log('entered') */
       if(score+1 === array.length){ 
+        setWin(true)
         return;
       }
       let shuffledCharacters = [];
@@ -63,6 +66,12 @@ function App() {
     };
   
     return (
+      /* win ? (<>
+          <h1>Won</h1>
+      </>) :
+      defeat ? (<>
+          <h1>Defeated</h1>
+      </>) : 
       start ? (<>
           <GamePage
               charactersToPlayWith={charactersToPlayWith}
@@ -77,6 +86,7 @@ function App() {
               bestScore={bestScore}
               handleClick={handleClick}
               goBackToStartPage={goBackToStartPage}
+              setDefeat={setDefeat}
               />
           <Foot 
               playSound={playSound}
@@ -87,7 +97,8 @@ function App() {
         </>
     ) : (
       <StartPage setStart={setStart} setDifficulty={setDifficulty}/>
-    )
+    ) */
+    <GameOver />
   )
 }
 
