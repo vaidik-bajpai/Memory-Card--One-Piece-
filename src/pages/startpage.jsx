@@ -1,4 +1,5 @@
 import "/src/styles/startPage.css";
+import {motion} from "framer-motion"
 function StartPage({
     setStart ,
     setDifficulty
@@ -18,13 +19,41 @@ function StartPage({
     }
     return(
         <div className="startPage">
-            <img src="./src/assets/One_Piece_Logo.png" alt="logo" width="400px" height="150px"
+            <img src="./src/assets/One_Piece_Logo.png" alt="logo" width="500px" height="auto"
             />
             <h1 className="gameTitle">Memory G<span>a</span>me</h1>
             <div className="difficulty">
-                <button className="easy diff" onClick={handleDifficulty}>Easy</button>
-                <button className="medium diff" onClick={handleDifficulty}>Medium</button>
-                <button className="hard diff" onClick={handleDifficulty}>Hard</button>
+                <motion.button
+                    className="easy diff" 
+                    onClick={handleDifficulty}
+                    whileHover={{
+                        scale: 1.1
+                    }}>
+                        Easy
+                </motion.button>
+                <motion.button 
+                    className="medium diff" 
+                    onClick={handleDifficulty}
+                    whileHover={{
+                        scale: 1.1
+                    }}>
+                        Medium
+                </motion.button>
+                <motion.button 
+                    className="hard diff" 
+                    onClick={handleDifficulty}
+                    whileHover={{
+                        scale: 1.1
+                    }}
+                    transition={{
+                        layout: {
+                            duration: 1,
+                            type: "spring"
+                        }
+                    }}>
+                    
+                        Hard
+                </motion.button>
             </div>
         </div>
     )

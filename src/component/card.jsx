@@ -1,30 +1,20 @@
-function Card({character, handleClick, setScore, charactersToPlayWith, setCharacterstoDisplay, getCharactersToDisplay, setDefeat}){
-    function handleClick(){
-        if(!character.clicked){
-            console.log(character, charactersToPlayWith.length)
-            character.clicked = true
-            setScore(score => score+1);
-            getCharactersToDisplay(charactersToPlayWith)
-        }
-        else{
-            console.log("defeat");
-
-            setDefeat(true);
-        }
-    }
+import Tilt from "react-parallax-tilt";
+import {motion} from 'framer-motion';
+function Card({handleClick, character, handleFlip}){
+    
     return(
-        <div
-            className={"Card " + character.name}
-            onClick={handleClick}>
-            <div
+        <Tilt glareEnable={true} glareColor="whitesmoke" glareMaxOpacity={0.9} glareBorderRadius="40px">
+        <motion.div
+            className={"flip-card Card " + character.name}
+            onClick={event => handleClick(event, character)}>
+            <motion.div
+                className={"cardImage"}
                 style={{
-                    width: "180px",
-                    height: "100%",
                     backgroundImage: `url(${character.src})`,
-                    backgroundSize: "cover"
                 }}>
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
+        </Tilt>
     )
 }
 

@@ -18,16 +18,40 @@ function App() {
     const [charactersToDisplay, setCharactersToDisplay] = useState([])
     const [difficulty, setDifficulty] = useState([])
     const [start, setStart] = useState(false)
-    const [roundResult, setRoundResult] = useState('')
+    const [gameState, setGameState] = useState('')
+    const [isFlipped, setIsFlipped] = useState(false)
+    const [isAnimating, setIsAnimating] = useState(false)
 
     function goBackToStartPage(){
       console.log("goBackToStartPage")
+      charactersToPlayWith.forEach((character) => {
+        character.clicked = false;
+      })
       setDifficulty([])
       setStart(false)
     }
-    function handleClick(){
-      console.log("clicked")
+    function handleFlip(){
+      setIsFlipped(!isFlipped);
+      setIsAnimating(true)
     }
+    function handleClick(event, character){
+      handleFlip()
+      if(character.clicked == true){
+        setGameState('loss');
+        return
+      }
+      if(score >= bestScore){
+        setBestScore(bestScore+1)
+      }
+      setScore(score => score+1);
+      console.log(charactersToPlayWith, charactersToPlayWith.length)
+      character.clicked = true
+      getCharactersToDisplay(charactersToPlayWith)
+      if(score+1 === charactersToPlayWith.length){
+        setGameState('win');
+        return;
+      }
+  }
     const getCharactersToPlayWith = () => {
       let randomCharacters = [];
   
@@ -44,8 +68,7 @@ function App() {
   
     const getCharactersToDisplay = (array) => {
       /* console.log('entered') */
-      if(score+1 === array.length){ 
-        setWin(true)
+      if(score+1 === array.length){
         return;
       }
       let shuffledCharacters = [];
@@ -66,13 +89,7 @@ function App() {
     };
   
     return (
-      /* win ? (<>
-          <h1>Won</h1>
-      </>) :
-      defeat ? (<>
-          <h1>Defeated</h1>
-      </>) : 
-      start ? (<>
+       start ? (<>
           <GamePage
               charactersToPlayWith={charactersToPlayWith}
               getCharactersToPlayWith={getCharactersToPlayWith}
@@ -86,7 +103,8 @@ function App() {
               bestScore={bestScore}
               handleClick={handleClick}
               goBackToStartPage={goBackToStartPage}
-              setDefeat={setDefeat}
+              gameState={gameState}
+              setGameState={setGameState}
               />
           <Foot 
               playSound={playSound}
@@ -96,9 +114,16 @@ function App() {
               getCharactersToDisplay={getCharactersToDisplay}/>
         </>
     ) : (
-      <StartPage setStart={setStart} setDifficulty={setDifficulty}/>
-    ) */
-    <GameOver />
+      <>
+        <StartPage setStart={setStart} setDifficulty={setDifficulty}/>
+        <Foot 
+          playSound={playSound}
+          setPlaySound={setPlaySound}
+          playMusic={playMusic}
+          setPlayMusic={setPlayMusic}
+          getCharactersToDisplay={getCharactersToDisplay}/>
+      </>
+    )
   )
 }
 

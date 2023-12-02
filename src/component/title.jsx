@@ -1,3 +1,5 @@
+import {motion} from 'framer-motion';
+
 function Title({
     goBackToStartPage,
     score,
@@ -5,6 +7,7 @@ function Title({
     bestScore,
     setBestScore,
     playClickSound,
+    setGameState,
 }){
     return(
         <div
@@ -13,10 +16,10 @@ function Title({
                 height: "125px",
                 marginBottom: "30px",
             }}>
-            <div >
+            <motion.div whileHover={{scale: 1.1}}>
                 <img onClick={goBackToStartPage} src="./src/assets/One_Piece_Logo.png" alt="logo" height="100%" width="auto"
                 />
-            </div>
+            </motion.div>
             <div
                 className="score"
                 style={{

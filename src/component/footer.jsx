@@ -1,3 +1,4 @@
+import {motion} from 'framer-motion'
 function Foot({
     playSound,
     setPlaySound,
@@ -14,10 +15,10 @@ function Foot({
     return(
         <div className="footer">
             <div className="soundAndMusic">
-                <button className="sound" onClick={toggleMusic}></button>
-                <button className="music" onClick={toggleSound}></button>
+                <motion.button whileHover={{scale: 1.1}} className="sound" onClick={toggleMusic}></motion.button>
+                <motion.button whileHover={{scale: 1.1}} className="music" onClick={toggleSound}></motion.button>
             </div>
-            <button className="rules" onClick={getCharactersToDisplay}></button>
+            <motion.button whileHover={{scale: 1.1}} className="rules" onClick={getCharactersToDisplay}></motion.button>
         </div>
     )
 }

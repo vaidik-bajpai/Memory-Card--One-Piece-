@@ -3,6 +3,8 @@ import Card from "../component/card"
 import characters from "../characters"
 import { useState, useEffect } from "react";  
 import GameOver from "./gameOver";
+import {motion, AnimatePresence} from "framer-motion"
+
 
 function GamePage({
     charactersToPlayWith,
@@ -17,7 +19,8 @@ function GamePage({
     bestScore,
     handleClick,
     setCharactersToDisplay,
-    setDefeat,
+    gameState,
+    setGameState,
 }){
     useEffect(() => {
         console.log('start');
@@ -33,6 +36,15 @@ function GamePage({
         }
     }, []);
 
+    function restartGame(){
+        setGameState('');
+        charactersToPlayWith.forEach(character => {
+            character.clicked = false
+        })
+        setScore(0)
+        getCharactersToPlayWith()
+    }
+
     return(
         <>
             <Title 
@@ -40,18 +52,31 @@ function GamePage({
                 score={score}
                 setScore={setScore}
                 bestScore={bestScore}
-                setBestScore={setBestScore}/>
-
+                setBestScore={setBestScore}
+                setGameState={setGameState}/>
+                
 
             <div 
                 className="Cards"
                 height="100%">
                 {charactersToDisplay.map(character => {
                     return(
-                        <Card setDefeat={setDefeat} character={character} charactersToPlayWith={charactersToPlayWith} setCharactersToDisplay={setCharactersToDisplay} key={character.id} handleClick={handleClick} setScore={setScore} getCharactersToDisplay={getCharactersToDisplay}/>
+                        <Card   
+                        character={character}
+                        handleClick={handleClick}/>
                     )
                 })}
             </div>
+
+            <AnimatePresence>
+                {
+                    gameState !== '' && 
+                        <GameOver 
+                            restartGame={restartGame}
+                            gameState={gameState}
+                        />   
+                }
+            </AnimatePresence>
         </>
       
     )

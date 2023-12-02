@@ -1,20 +1,31 @@
 import '../styles/gameOver.css'
-function GameOver(){
+import {motion} from "framer-motion"
+function GameOver(
+    {
+        restartGame,
+        gameState,
+    }
+){
     return(
         <>
-            <div className="resultPage">
-                <div>
-                    "You Lose"
-                    {/* {defeat ? "You Lose": "You Win"} */}
-                </div>
-                <button
-                    /* onClick={() => {
-                        restart()
-                    }} */>
-                    Restart
-                </button>
+            
+            <div className="overlay">
             </div>
-            <div className="gameOver">
+            <div 
+                className={"resultPage " + gameState}
+                >
+                    <div className={"resultText "}>
+                        {"You " + gameState}
+                        {/* {defeat ? "You Lose": "You Win"} */}
+                    </div>
+                    <motion.button
+                        className='resultRestart'
+                        onClick={() => {
+                            restartGame()
+                        }}
+                        whileHover={{scale: 1.1}}>
+                        Restart
+                    </motion.button>
             </div>
         </>
     )

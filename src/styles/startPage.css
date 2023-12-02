@@ -1,3 +1,4 @@
+
 .difficulty{
     display: flex;
     gap: 20px;
@@ -7,18 +8,19 @@
     display: flex;
     align-items: center;
     font-weight: 800;
-    background-image: linear-gradient( #62C3F8, #2E62A3);
+    background-image: linear-gradient( #40ADF8, #1748D7);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 3.5rem;
+    font-size: 4rem;
+    padding: 10px;
 }
 
 .gameTitle span{
     background-color: #D70000;
     -webkit-background-clip: text;
     background-clip: text;
-  }
+}
 
 .startPage{
     display: flex;
@@ -27,15 +29,16 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .diff{
-    background-image: linear-gradient( #62C3F8, #2E62A3);
-    font-size: 1.5rem;
-    color: #FFCD00;
+    background-image: linear-gradient( #40ADF8, #1748D7);
+    font-size: 2rem;
+    color: #F4E03F;
     border: 2px solid #D70000;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     font-weight: 500;
+    
 }
